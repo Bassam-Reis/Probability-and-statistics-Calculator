@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Olasılk ve İstatistiks</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
+  <body>
+    <main id="particles-js" class="">
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-12 mb-4">
+            <div class="glass-container">
+              <h1>İstatistiks hesap makinası</h1>
+              <form>
+                <textarea
+                  name=""
+                  id="dizi"
+                  cols=""
+                  rows="5"
+                  placeholder="Lütfen listeyi boşluklarla ayırarak yazınız.&#10;Örn: 20.5 50 9"
+                ></textarea>
+              </form>
+              <div class="selection-container">
+                <h3>İşlemleri İşaretleyin</h3>
+                <div class="checkBoxes-container">
+                  <div class="checkBox-container">
+                    <input type="checkbox" id="BasitSeri" />
+                    <label for="BasitSeri">Basit Seri</label>
+                  </div>
+                  <div class="checkBox-container">
+                    <input type="checkbox" id="basitOrnekleme" />
+                    <label for="basitOrnekleme">Basit Örnekleme</label>
+                  </div>
+                  <div class="checkBox-container">
+                    <input type="checkbox" id="sistematikOrnekleme" />
+                    <label for="sistematikOrnekleme">
+                      Sistematik Örnekleme
+                    </label>
+                  </div>
+                  <div class="checkBox-container">
+                    <input type="checkbox" id="merkezEgilim" />
+                    <label for="merkezEgilim"> merkezi eğilim ölçüleri </label>
+                  </div>
+                  <div class="checkBox-container">
+                    <input type="checkbox" id="dagılımEgilim" />
+                    <label for="dagılımEgilim"> Dağılım ölçüleri </label>
+                  </div>
+                  <div class="checkBox-container">
+                    <input type="checkbox" id="frekansSeri" />
+                    <label for="frekansSeri"> Frekans Seri </label>
+                  </div>
+                  <div class="checkBox-container">
+                    <input type="checkbox" id="frekansTablosu" />
+                    <label for="frekansTablosu"> Frekans Tablosu </label>
+                  </div>
+                  <div class="checkBox-container">
+                    <input type="checkbox" id="PermtasiyonCheckmark" />
+                    <label for="PermtasiyonCheckmark"> Permtasiyon </label>
+                  </div>
+                  <div class="checkBox-container">
+                    <input type="checkbox" id="KombinasyonCheckmark" />
+                    <label for="KombinasyonCheckmark"> Kombinasyon </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- basit seri: -->
+          <div class="col-12 mb-4 basitSeri-container d-none">
+            <div class="glass-container">
+              <h3>basit seri:</h3>
+              <p id="sortedList">{ }</p>
+            </div>
+          </div>
+          <!-- merkezi eğilim ölçüleri: -->
+          <div class="col-12 mb-4 merkeziEgilim-container d-none">
+            <div class="glass-container">
+              <h3>merkezi eğilim ölçüleri:</h3>
+              <div class="row">
+                <div class="col-lg-4">
+                  <h4>
+                    Ortalama: <span id="ortalama">Henüz Hesaplanmadı</span>
+                  </h4>
+                </div>
+                <div class="col-lg-4">
+                  <h4>Medyan: <span id="medyan">Henüz Hesaplanmadı</span></h4>
+                </div>
+                <div class="col-lg-4">
+                  <h4>Mod: <span id="modu">Henüz Hesaplanmadı</span></h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- basit rasgele örnekleme -->
+          <div class="col-12 mb-4 basitRasgele-container d-none">
+            <div class="glass-container">
+              <h3>basit rasgele örnekleme:</h3>
+              <input
+                type="tel"
+                id="basitOrneklemeInput"
+                placeholder="Örnek Sayısı"
+                required
+              />
+              <h4>Örnekler:</h4>
+              <p id="basitOrneklemeSonuc">{ }</p>
+            </div>
+          </div>
+          <!-- sistematik rasgele örnekleme -->
+          <div class="col-12 mb-4 sistematik-container d-none">
+            <div class="glass-container">
+              <h3>sistematik rasgele örnekleme:</h3>
+              <input
+                type="tel"
+                id="sistematikOrneklemeInput"
+                placeholder="Örnek Sayısı"
+                required
+              />
+              <h4>Örnekler:</h4>
+              <p id="sistematikOrneklemeSonuc">{ }</p>
+            </div>
+          </div>
+          <!-- frekans seri -->
+          <div class="col-12 mb-4 fekansSeri-container d-none">
+            <div class="glass-container">
+              <h3>frekans seri</h3>
+              <table id="frekansSeriTablosu">
+                <thead>
+                  <tr>
+                    <td>X</td>
+                    <td>fi</td>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+          <!-- frekans Tablosu -->
+          <div class="col-12 mb-4 frekansTablosu-container d-none">
+            <div class="glass-container">
+              <h3>Frekans Tablosu</h3>
+              <table id="frekansTablosuHtml">
+                <thead>
+                  <tr>
+                    <td>Sınıf</td>
+                    <td>Sınıf Snırları</td>
+                    <td>Sınıfın Ort. Noktası</td>
+                    <td>f<small>i</small></td>
+                    <td>Eklemeli f<small>i</small></td>
+                    <td>Oransal f<small>i</small></td>
+                    <td>Oransal Eklemeli f<small>i</small></td>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+          <!-- dağılım ölçüleri: -->
+          <div class="col-12 mb-4 dagilim-container d-none">
+            <div class="glass-container">
+              <h3>dağılım ölçüleri:</h3>
+              <div class="row">
+                <div class="col-4 mb-2">
+                  <h4>
+                    Standart Sapma:
+                    <span id="standartSapma">Henüz Hesaplanmadı</span>
+                  </h4>
+                </div>
+                <div class="col-4 mb-2">
+                  <h4>Varyans: <span id="Varyans">Henüz Hesaplanmadı</span></h4>
+                </div>
+                <div class="col-4 mb-2">
+                  <h4>
+                    Ortalama Mutlak Sapma:
+                    <span id="ortalamaMutlakSapma">Henüz Hesaplanmadı</span>
+                  </h4>
+                </div>
+                <div class="col-4 mb-2">
+                  <h4>
+                    Q1:
+                    <span id="Q1">Henüz Hesaplanmadı</span>
+                  </h4>
+                </div>
+                <div class="col-4 mb-2">
+                  <h4>
+                    Q3:
+                    <span id="Q3">Henüz Hesaplanmadı</span>
+                  </h4>
+                </div>
+                <div class="col-4 mb-2">
+                  <h4>
+                    M3:
+                    <span id="M3">Henüz Hesaplanmadı</span>
+                  </h4>
+                </div>
+                <div class="col-4 mb-2">
+                  <h4>
+                    M4:
+                    <span id="M4">Henüz Hesaplanmadı</span>
+                  </h4>
+                </div>
+                <div class="col-4 mb-2">
+                  <h4>
+                    Değişim Katsayısı:
+                    <span id="DK">Henüz Hesaplanmadı</span>
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Permtasiyon -->
+          <div class="col-12 mb-4 Permtasiyon-container d-none">
+            <div class="glass-container">
+              <h3>Permütasyon:</h3>
+              <div class="row">
+                <div class="col-lg-4">
+                  <input
+                    type="text"
+                    id="Pern"
+                    placeholder="Please enter ( n )"
+                    oninput="calculatePermutation()"
+                  />
+                </div>
+                <div class="col-lg-4">
+                  <input
+                    type="text"
+                    id="PerR"
+                    placeholder="Please enter ( r )"
+                    oninput="calculatePermutation()"
+                  />
+                </div>
+                <div class="col-lg-4 d-flex align-content-center">
+                  <div>
+                    <h4 class="d-flex align-content-center">
+                      Permutasyon:
+                      <span id="permutasyon"> Henüz Hesaplanmadı</span>
+                    </h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Kombinasyon -->
+          <div class="col-12 mb-4 Kombinasyon-container d-none">
+            <div class="glass-container">
+              <h3>Kombinasyon:</h3>
+              <div class="row">
+                <div class="col-lg-4">
+                  <input
+                    type="text"
+                    id="KomN"
+                    placeholder="Please enter ( n )"
+                    oninput="calculateKompinasion()"
+                  />
+                </div>
+                <div class="col-lg-4">
+                  <input
+                    type="text"
+                    id="KomR"
+                    placeholder="Please enter ( r )"
+                    oninput="calculateKompinasion()"
+                  />
+                </div>
+                <div class="col-lg-4 d-flex align-content-center">
+                  <div>
+                    <h4 class="d-flex align-content-center">
+                      Kombinasyon:
+                      <span id="kombinasyon"> Henüz Hesaplanmadı</span>
+                    </h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/particles.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/custom.js"></script>
+    <script defer>
+      window.addEventListener("DOMContentLoaded", (event) => {
+        particlesJS.load("particles-js", "js/particles.json", function () {
+          console.log("callback - particles-js config loaded");
+        });
+      });
+    </script>
+  </body>
+</html>
