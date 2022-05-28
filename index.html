@@ -110,28 +110,69 @@
           <div class="col-12 mb-4 basitRasgele-container d-none">
             <div class="glass-container">
               <h3>basit rasgele örnekleme:</h3>
-              <input
-                type="tel"
-                id="basitOrneklemeInput"
-                placeholder="Örnek Sayısı"
-                required
-              />
-              <h4>Örnekler:</h4>
-              <p id="basitOrneklemeSonuc">{ }</p>
+              <div class="row">
+                <div class="col-lg-4">
+                  <input
+                    type="tel"
+                    id="basitOrneklemeInputMin"
+                    placeholder="Please enter Min"
+                    oninput="basitOrneklemeSecme()"
+                    required
+                  />
+                </div>
+                <div class="col-lg-4">
+                  <input
+                    type="tel"
+                    id="basitOrneklemeInputMax"
+                    placeholder="Please enter Max"
+                    oninput="basitOrneklemeSecme()"
+                    required
+                  />
+                </div>
+                <div class="col-lg-4">
+                  <input
+                    type="tel"
+                    id="basitOrneklemeInputn"
+                    placeholder="Please enter n"
+                    oninput="basitOrneklemeSecme()"
+                    required
+                  />
+                </div>
+                <div class="col-lg-12 mt-2">
+                  <h4>Örnekler:</h4>
+                  <p id="basitOrneklemeSonuc">{ }</p>
+                </div>
+              </div>
             </div>
           </div>
           <!-- sistematik rasgele örnekleme -->
           <div class="col-12 mb-4 sistematik-container d-none">
             <div class="glass-container">
               <h3>sistematik rasgele örnekleme:</h3>
-              <input
-                type="tel"
-                id="sistematikOrneklemeInput"
-                placeholder="Örnek Sayısı"
-                required
-              />
-              <h4>Örnekler:</h4>
-              <p id="sistematikOrneklemeSonuc">{ }</p>
+              <div class="row">
+                <div class="col-lg-6">
+                  <input
+                    type="tel"
+                    id="sistematikOrneklemeInputN"
+                    placeholder="Please enter N"
+                    oninput="sistematikRasgeleOrneklemeSecme()"
+                    required
+                  />
+                </div>
+                <div class="col-lg-6">
+                  <input
+                    type="tel"
+                    id="sistematikOrneklemeInputn"
+                    oninput="sistematikRasgeleOrneklemeSecme()"
+                    placeholder="Please enter n"
+                    required
+                  />
+                </div>
+                <div class="cool-lg-12">
+                  <h4>Örnekler:</h4>
+                  <p id="sistematikOrneklemeSonuc">{ }</p>
+                </div>
+              </div>
             </div>
           </div>
           <!-- frekans seri -->

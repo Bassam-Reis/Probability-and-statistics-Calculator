@@ -8,27 +8,27 @@ let fekansTablosu = [];
 
 // Test Data
 // inputText.value = "1.5 1.5 2.6 2.6 3.4 3.8 3.8 4.1 4.1 4.6 4.6 4.6 5.2 5.2";
-inputText.value =
-  "2 3 3 4 5 6 7 8 9 4 5 7 8 9 10 25 32 5 7 8 4 6 3 2 1 4 5 8 7 9 6 5 2 1 4";
+// inputText.value =
+//   "2 3 3 4 5 6 7 8 9 4 5 7 8 9 10 25 32 5 7 8 4 6 3 2 1 4 5 8 7 9 6 5 2 1 4";
 // inputText.value =
 //   "81 168 224 364 464 586 643 854 1080 1520 89 170 226 367 544 592 801 921 1100 1850 116 192 249 424 548 601 831 940 1130 1850 130 203 345 456 557 623 842 1020 1350 2030";
-dizi = inputText.value.split(" ").map((x) => Number(x));
-if (dizi[dizi.length - 1] == "") {
-  dizi.pop();
-}
-VerilerSiralama();
-frekansSeriHesaplama();
-calculateAvarage();
-calcMedian();
-ModHesaplama();
-frekansTablosuHesaplama();
-standartSapmaHesaplama();
-ortalamaMutlakSapma();
-Q1Hesaplama();
-Q3Hesaplama();
-m3Hesaplama();
-m4Hesaplama();
-DKHesaplama();
+// dizi = inputText.value.split(" ").map((x) => Number(x));
+// if (dizi[dizi.length - 1] == "") {
+//   dizi.pop();
+// }
+// VerilerSiralama();
+// frekansSeriHesaplama();
+// calculateAvarage();
+// calcMedian();
+// ModHesaplama();
+// frekansTablosuHesaplama();
+// standartSapmaHesaplama();
+// ortalamaMutlakSapma();
+// Q1Hesaplama();
+// Q3Hesaplama();
+// m3Hesaplama();
+// m4Hesaplama();
+// DKHesaplama();
 //End of test Data
 
 // Ham Veriler Input Olay
@@ -42,6 +42,7 @@ inputText.addEventListener("input", () => {
   frekansSeriHesaplama();
   calculateAvarage();
   calcMedian();
+  ModHesaplama();
   frekansTablosuHesaplama();
   standartSapmaHesaplama();
   ortalamaMutlakSapma();
@@ -50,21 +51,6 @@ inputText.addEventListener("input", () => {
   m3Hesaplama();
   m4Hesaplama();
   DKHesaplama();
-});
-
-// Basit Ornekleme Sayisi Input Olay
-let basitOrneklemeInput = document.getElementById("basitOrneklemeInput");
-basitOrneklemeInput.addEventListener("input", function () {
-  // debugger;
-  basitOrneklemeSecme(Number(basitOrneklemeInput.value));
-});
-
-// sistematik rasgele Ornekleme Sayisi Input Olay
-let sistematikOrneklemeInput = document.getElementById(
-  "sistematikOrneklemeInput"
-);
-sistematikOrneklemeInput.addEventListener("input", function () {
-  sistematikRasgeleOrneklemeSecme(Number(sistematikOrneklemeInput.value));
 });
 
 //Girilen Verileri Sıralama
@@ -105,47 +91,67 @@ function basitOrneklemeSecme(sayi) {
   // Clear previos Samples
   orneklemeSonuc.innerHTML = "";
   // check if number of samples is less than orginial Data
-  if (sayi > dizi.length) {
-    orneklemeSonuc.innerHTML =
-      "Örnek sayısı orijinal verilerden fazla olamaz! 😉";
+  let min = Number(document.getElementById("basitOrneklemeInputMin").value);
+  let max = Number(document.getElementById("basitOrneklemeInputMax").value);
+  let n = Number(document.getElementById("basitOrneklemeInputn").value);
+  let selectedSamples = [];
+
+  // Generate Samples
+  let samples = [];
+  for (let i = min; i <= max; i++) {
+    samples.push(i);
+  }
+
+  // Check if Min and Max are valid
+  if (min > max) {
+    orneklemeSonuc.innerHTML = "Min degeri Max degerinden buyuk olamaz";
     return;
   }
-  let selectedIndexes = [];
-  let selectedSamples = [];
-  for (let i = 0; i < sayi; i++) {
-    let randomNum = Math.floor(Math.random() * (dizi.length - 1));
-    // Check if this item is already selected
-    if (selectedIndexes.includes(randomNum)) {
-      i--;
-      continue;
+
+  // Selecting Samples
+  for (let i = 0; i < n; i++) {
+    let randomIndex = Math.floor(Math.random() * samples.length);
+    if (n > samples.length) {
+      selectedSamples.push(samples[randomIndex]);
+    } else {
+      if (selectedSamples.indexOf(samples[randomIndex]) == -1) {
+        selectedSamples.push(samples[randomIndex]);
+      } else {
+        i--;
+      }
     }
-    selectedIndexes.push(randomNum);
-    selectedSamples.push(dizi[randomNum]);
   }
+
+  // Print Samples
   orneklemeSonuc.innerHTML = "{ " + selectedSamples + " }";
 }
 
 //sistematik rasgele örnekleme Secme
-function sistematikRasgeleOrneklemeSecme(sayi) {
+function sistematikRasgeleOrneklemeSecme() {
   let orneklemeSonuc = document.getElementById("sistematikOrneklemeSonuc");
   // Clear previos Samples
   orneklemeSonuc.innerHTML = "";
+
+  let N = Number(document.getElementById("sistematikOrneklemeInputN").value);
+  let n = Number(document.getElementById("sistematikOrneklemeInputn").value);
+
   // check if number of samples is less than orginial Data
-  if (sayi > dizi.length) {
+  if (n > N) {
     orneklemeSonuc.innerHTML =
       "Örnek sayısı orijinal verilerden fazla olamaz! 😉";
     return;
   }
-  let selectedSamples = [];
-  let k = Math.floor(dizi.length / sayi);
+  let k = Math.floor(N / n);
   // get random index in range of k
-  let sampleIndex = Math.floor(Math.random() * k);
-  // debugger;
-  for (let i = 0; i < sayi; i++) {
-    selectedSamples.push(dizi[sampleIndex]);
-    sampleIndex += k;
+  let sampleIndex = Math.floor(Math.random() * k) + 1;
+
+  let sonuc = "{ ";
+  for (let i = 0; i < n; i++) {
+    let temp = sampleIndex + i * k;
+    sonuc += temp + " ";
   }
-  orneklemeSonuc.innerHTML = "{ " + selectedSamples + " }";
+  sonuc += " }";
+  orneklemeSonuc.innerHTML = sonuc;
 }
 
 // Ortalama Hesaplama
@@ -207,11 +213,13 @@ function frekansTablosuHesaplama() {
   // creating frequency table object
   let classesBorder = sortedList[0];
   let acculmulatedFreq = 0;
-  debugger;
   for (let i = 0; i < K; i++) {
     let oldClassesBorder = classesBorder;
     fekansTablosu[i] = {};
     // calculate new classes border
+    if (i == K - 1) {
+      classesBorder = classesBorder + 1;
+    }
     if (Number.isInteger(classesBorder)) {
       fekansTablosu[i].borders =
         classesBorder + " - " + (classesBorder + h - 1);
@@ -335,6 +343,7 @@ function Q1Hesaplama() {
       return;
     }
   });
+  // console.log(selectedClass);
   // find n1 value
   for (let i = 0; i < fekansTablosu.indexOf(selectedClass); i++) {
     const element = fekansTablosu[i];

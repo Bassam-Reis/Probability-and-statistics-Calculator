@@ -1,5 +1,6 @@
 body {
   font-family: "Montserrat", sans-serif;
+  background: linear-gradient(320deg, #f27121, #e94057, #8a2387);
 }
 
 main {
@@ -173,5 +174,17 @@ main form textarea {
 
 main form textarea:focus {
   outline: none;
+}
+
+@media screen and (max-width: 1200px) {
+  main .glass-container .selection-container .checkBoxes-container .checkBox-container {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 765px) {
+  main .glass-container .selection-container .checkBoxes-container .checkBox-container {
+    width: 100%;
+  }
 }
 /*# sourceMappingURL=style.css.map */

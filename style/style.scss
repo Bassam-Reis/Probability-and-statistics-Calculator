@@ -1,5 +1,9 @@
+// html{
+//   background: black;
+// }
 body {
   font-family: "Montserrat", sans-serif;
+  background: linear-gradient(320deg, #f27121, #e94057, #8a2387);
 }
 main {
   padding: 2em 1em;
@@ -131,6 +135,33 @@ main {
       padding: 0.5em 1em;
       &:focus {
         outline: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  main {
+    .glass-container {
+      .selection-container{
+        .checkBoxes-container{
+          .checkBox-container{
+            width: 50%;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 765px) {
+  main {
+    .glass-container {
+      .selection-container{
+        .checkBoxes-container{
+          .checkBox-container{
+            width: 100%;
+          }
+        }
       }
     }
   }
